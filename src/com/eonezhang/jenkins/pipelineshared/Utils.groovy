@@ -1,5 +1,6 @@
 #!/usr/bin/groovy
-package com.eonezhang.jenkins.pipelineshared;
+package com.eonezhang.jenkins.pipelineshared
+import com.cloudbees.groovy.cps.NonCPS
 
 def helloWorld() {
 	return "say hello from shared lib"
@@ -7,7 +8,8 @@ def helloWorld() {
 
 @NonCPS
 def getProjectVersion() {
-	def file = readFile('pom.xml')
+	def workspace = manager.build.getEnvVars()["WORKSPACE"]
+	def file = readFile("${workspace}/pom.xml")
 	def project = new XmlSlurper().parseText(file)
 	return project.version.text()
 }
