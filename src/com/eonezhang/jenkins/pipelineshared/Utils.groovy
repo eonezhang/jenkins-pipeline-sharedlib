@@ -6,11 +6,10 @@ def helloWorld() {
 	return "say hello from shared lib"
 }
 
-@NonCPS
-def getProjectVersion() {
-	def file = readFile(pwd() + "/pom.xml")
-	def project = new XmlSlurper().parseText(file)
-	return project.version.text()
+def getPomVersion(String path) {
+	def contents = readFile(path)
+	def project = new XmlSlurper().parseText(contents)
+	return project.version.text().trim()
 }
 
 return this;
