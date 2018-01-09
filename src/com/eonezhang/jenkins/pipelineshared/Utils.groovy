@@ -9,6 +9,8 @@ def helloWorld() {
 @NonCPS
 def getProjectVersion() {
 	def workspace = manager.build.getEnvVars()["WORKSPACE"]
+	env.WORKSPACE = pwd()
+	println env.WORKSPACE
 	println workspace
 	def file = readFile("${workspace}/pom.xml")
 	def project = new XmlSlurper().parseText(file)
