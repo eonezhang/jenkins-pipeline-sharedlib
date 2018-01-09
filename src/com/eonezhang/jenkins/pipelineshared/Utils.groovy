@@ -10,6 +10,8 @@ def helloWorld() {
 def getProjectVersion() {
 	def workspace = manager.build.getEnvVars()["WORKSPACE"]
 	env.WORKSPACE = pwd()
+	def releaseScript = readFileFromWorkspace('pom.xml')
+	println releaseScript
 	println env.WORKSPACE
 	println workspace
 	def file = readFile("${workspace}/pom.xml")
